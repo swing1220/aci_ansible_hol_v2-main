@@ -1,0 +1,43 @@
+- hosts: apic
+  connection: local
+  gather_facts: no
+
+  vars:
+    apic_info: &apic_info
+      host:           "{{ ansible_host }}" 
+      user:           "{{ ansible_user }}" 
+      password:       "{{ ansible_password }}" 
+      validate_certs: "{{ validate_certs }}"
+      use_ssl:        "{{ use_ssl }}"
+
+  vars_files: 
+    - vars/tenant.yml
+    - vars/static_paths.yml
+
+  tasks:
+  - name: TASK_1 - check tenant
+    include_tasks: check_tenant.yml
+
+  - name: TASK_2 - check epg
+    include_tasks: check_epg.yml
+
+  - name: TASK_3 - check oper stat
+    include_tasks: check_operstat.yml
+
+  - name: TASK_4 - check static path
+    include_tasks: check_staticpath.yml
+
+  - name: TASK_5 - create static port binding
+    cisco.aci.aci_static_binding_to_epg:
+      <<: *apic_info
+      tenant:           "{{ tenant.name }}"
+      ap:               "{{ item.ap }}"
+      epg:              "{{ item.epg }}"
+      encap_id:         "{{ item.encap }}"
+      deploy_immediacy: "{{ item.immediacy }}"
+      interface_mode:   "{{ item.mode }}"
+      interface_type:   "{{ item.type }}"
+      pod_id:           "{{ item.pod }}"
+      leafs:            "{{ item.leaf }}"
+      interface:        "{{ item.interface }}"
+    loop: "{{ static_paths }}"

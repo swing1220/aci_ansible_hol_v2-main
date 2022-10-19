@@ -1,0 +1,20 @@
+- hosts: localhost
+  gather_facts: no
+
+  tasks:
+    - name: TASK_1 - read variables from csv
+      community.general.read_csv:
+        path: files/static_paths.csv
+      register: static_ports
+    
+    - debug: var=static_ports
+
+    - name: TASK_2 - create variable file
+      copy:
+        content: |
+          ---
+          static_paths:
+          {% for item in static_ports.list %}
+            - { ap: "{{ item.ap }}", epg: "{{ item.epg }}", encap: "{{ item.encap }}", immediacy: "{{ item.immediacy }}", mode: "{{ item.mode }}", type: "{{ item.type }}", pod: "{{ item.pod }}", leaf: "{{ item.leaf }}", interface: "{{ item.interface }}" }
+          {% endfor %}
+        dest: vars/static_paths.yml

@@ -1,0 +1,26 @@
+---
+  - name: check epg - querying
+    cisco.aci.aci_epg:
+      host:           "{{ ansible_host }}" 
+      user:           "{{ ansible_user }}" 
+      password:       "{{ ansible_password }}" 
+      validate_certs: "{{ validate_certs }}"
+      use_ssl:        "{{ use_ssl }}"
+      tenant:         "{{ tenant.name }}"
+      bd:             "{{ item.bd }}"
+      ap:             "{{ item.ap }}"
+      epg:            "{{ item.name }}"
+      state:          query
+    loop: "{{ epgs }}"
+    register: queried_epg
+
+  - name: check epg - set variable
+    set_fact:
+      queried_epg_dn: "{{ queried_epg | json_query('results[].current[].fvAEPg.attributes.{dn:dn}') }}"
+
+  # - debug: var=queried_epg_dn
+
+  - name: check epg - validate
+    ansible.builtin.assert:
+      that:     queried_epg_dn | length == epgs | length
+      fail_msg: EPG_NOT_EXISTS

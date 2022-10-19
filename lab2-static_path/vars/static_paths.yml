@@ -1,0 +1,32 @@
+---
+static_paths:
+  - { ap: "demoAp", epg: "EPG_VLAN2010", encap: "2010", immediacy: "immediate", mode: "untagged", type: "switch_port", pod: "1", leaf: "101", interface: "1/1" }
+  - { ap: "demoAp", epg: "EPG_VLAN2010", encap: "2010", immediacy: "immediate", mode: "untagged", type: "switch_port", pod: "1", leaf: "101", interface: "1/2" }
+  - { ap: "demoAp", epg: "EPG_VLAN2010", encap: "2010", immediacy: "immediate", mode: "untagged", type: "switch_port", pod: "1", leaf: "101", interface: "1/3" }
+  - { ap: "demoAp", epg: "EPG_VLAN2010", encap: "2010", immediacy: "immediate", mode: "untagged", type: "switch_port", pod: "1", leaf: "101", interface: "1/4" }
+  - { ap: "demoAp", epg: "EPG_VLAN2010", encap: "2010", immediacy: "immediate", mode: "untagged", type: "switch_port", pod: "1", leaf: "101", interface: "1/5" }
+  - { ap: "demoAp", epg: "EPG_VLAN2010", encap: "2010", immediacy: "immediate", mode: "untagged", type: "switch_port", pod: "1", leaf: "101", interface: "1/6" }
+  - { ap: "demoAp", epg: "EPG_VLAN2010", encap: "2010", immediacy: "immediate", mode: "untagged", type: "switch_port", pod: "1", leaf: "101", interface: "1/7" }
+  - { ap: "demoAp", epg: "EPG_VLAN2010", encap: "2010", immediacy: "immediate", mode: "untagged", type: "switch_port", pod: "1", leaf: "101", interface: "1/8" }
+  - { ap: "demoAp", epg: "EPG_VLAN2010", encap: "2010", immediacy: "immediate", mode: "untagged", type: "switch_port", pod: "1", leaf: "101", interface: "1/9" }
+  - { ap: "demoAp", epg: "EPG_VLAN2010", encap: "2010", immediacy: "immediate", mode: "untagged", type: "switch_port", pod: "1", leaf: "101", interface: "1/10" }
+  - { ap: "demoAp", epg: "EPG_VLAN2020", encap: "2020", immediacy: "immediate", mode: "untagged", type: "switch_port", pod: "1", leaf: "101", interface: "1/11" }
+  - { ap: "demoAp", epg: "EPG_VLAN2020", encap: "2020", immediacy: "immediate", mode: "untagged", type: "switch_port", pod: "1", leaf: "101", interface: "1/12" }
+  - { ap: "demoAp", epg: "EPG_VLAN2020", encap: "2020", immediacy: "immediate", mode: "untagged", type: "switch_port", pod: "1", leaf: "101", interface: "1/13" }
+  - { ap: "demoAp", epg: "EPG_VLAN2020", encap: "2020", immediacy: "immediate", mode: "untagged", type: "switch_port", pod: "1", leaf: "101", interface: "1/14" }
+  - { ap: "demoAp", epg: "EPG_VLAN2020", encap: "2020", immediacy: "immediate", mode: "untagged", type: "switch_port", pod: "1", leaf: "101", interface: "1/15" }
+  - { ap: "demoAp", epg: "EPG_VLAN2020", encap: "2020", immediacy: "immediate", mode: "untagged", type: "switch_port", pod: "1", leaf: "101", interface: "1/16" }
+  - { ap: "demoAp", epg: "EPG_VLAN2020", encap: "2020", immediacy: "immediate", mode: "untagged", type: "switch_port", pod: "1", leaf: "101", interface: "1/17" }
+  - { ap: "demoAp", epg: "EPG_VLAN2020", encap: "2020", immediacy: "immediate", mode: "untagged", type: "switch_port", pod: "1", leaf: "101", interface: "1/18" }
+  - { ap: "demoAp", epg: "EPG_VLAN2020", encap: "2020", immediacy: "immediate", mode: "untagged", type: "switch_port", pod: "1", leaf: "101", interface: "1/19" }
+  - { ap: "demoAp", epg: "EPG_VLAN2020", encap: "2020", immediacy: "immediate", mode: "untagged", type: "switch_port", pod: "1", leaf: "101", interface: "1/20" }
+  - { ap: "demoAp", epg: "EPG_VLAN2030", encap: "2030", immediacy: "immediate", mode: "untagged", type: "switch_port", pod: "1", leaf: "101", interface: "1/21" }
+  - { ap: "demoAp", epg: "EPG_VLAN2030", encap: "2030", immediacy: "immediate", mode: "untagged", type: "switch_port", pod: "1", leaf: "101", interface: "1/22" }
+  - { ap: "demoAp", epg: "EPG_VLAN2030", encap: "2030", immediacy: "immediate", mode: "untagged", type: "switch_port", pod: "1", leaf: "101", interface: "1/23" }
+  - { ap: "demoAp", epg: "EPG_VLAN2030", encap: "2030", immediacy: "immediate", mode: "untagged", type: "switch_port", pod: "1", leaf: "101", interface: "1/24" }
+  - { ap: "demoAp", epg: "EPG_VLAN2030", encap: "2030", immediacy: "immediate", mode: "untagged", type: "switch_port", pod: "1", leaf: "101", interface: "1/25" }
+  - { ap: "demoAp", epg: "EPG_VLAN2030", encap: "2030", immediacy: "immediate", mode: "untagged", type: "switch_port", pod: "1", leaf: "101", interface: "1/26" }
+  - { ap: "demoAp", epg: "EPG_VLAN2030", encap: "2030", immediacy: "immediate", mode: "untagged", type: "switch_port", pod: "1", leaf: "101", interface: "1/27" }
+  - { ap: "demoAp", epg: "EPG_VLAN2030", encap: "2030", immediacy: "immediate", mode: "untagged", type: "switch_port", pod: "1", leaf: "101", interface: "1/28" }
+  - { ap: "demoAp", epg: "EPG_VLAN2030", encap: "2030", immediacy: "immediate", mode: "untagged", type: "switch_port", pod: "1", leaf: "101", interface: "1/29" }
+  - { ap: "demoAp", epg: "EPG_VLAN2030", encap: "2030", immediacy: "immediate", mode: "untagged", type: "switch_port", pod: "1", leaf: "101", interface: "1/30" }

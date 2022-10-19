@@ -1,0 +1,78 @@
+- hosts: apic
+  connection: local
+  gather_facts: no
+  collections:
+  - cisco.aci
+
+  vars:
+    apic_info: &apic_info
+      host:           "{{ ansible_host }}" 
+      user:           "{{ ansible_user }}" 
+      password:       "{{ ansible_password }}" 
+      validate_certs: "{{ validate_certs }}"
+      use_ssl:        "{{ use_ssl }}"
+    
+    var_state: &var_state
+      state: "{{ state_all if state_all is defined else item.state if item.state is defined else 'present' }}"
+ 
+  vars_files: tenant_vars.yml
+
+  tasks:
+  # Tenants
+  - name: TASK_1 - Tenant
+    cisco.aci.aci_tenant:
+      <<: *apic_info
+      <<: *var_state
+      tenant: "{{ tenant.name }}"
+    register: task_tenant
+
+  # Tenants > (tenant) > Networking > VRFs
+  - name: TASK_2 - VRF
+    cisco.aci.aci_vrf:
+      <<: *apic_info
+      <<: *var_state
+      tenant: "{{ tenant.name }}"
+      vrf:    "{{ item.name }}"
+    loop: "{{ vrfs }}"
+
+  # Tenants > (tenant) > Networking > Bridge Domains
+  - name: TASK_3 - Bridge Domains
+    cisco.aci.aci_bd:
+      <<: *apic_info
+      <<: *var_state
+      tenant: "{{ tenant.name }}"
+      vrf:    "{{ item.vrf }}"
+      bd:     "{{ item.name }}"
+    loop: "{{ bridge_domains }}"
+
+  # Tenants > (tenant) > Networking > Bridge Domains > (bd) > Subnets
+  - name: TASK_4 - Bridge Domain Subnets
+    cisco.aci.aci_bd_subnet:
+      <<: *apic_info
+      <<: *var_state
+      tenant:  "{{ tenant.name }}"
+      bd:      "{{ item.bd }}"
+      gateway: "{{ item.subnet.split('/') | first }}"
+      mask:    "{{ item.subnet.split('/') | last }}"
+      scope:   "{{ item.scope }}"
+    loop: "{{ subnets }}"
+
+  # Tenants > (tenant) > Application Profiles
+  - name: TASK_5 - Application Profile
+    cisco.aci.aci_ap:
+      <<: *apic_info
+      <<: *var_state
+      tenant: "{{ tenant.name }}"
+      ap:     "{{ item.name }}"
+    loop: "{{ app_profiles }}"
+
+  # Tenants > (tenant) > Application Profiles > (ap) > Application EPGs
+  - name: TASK_6 - EPG
+    cisco.aci.aci_epg:
+      <<: *apic_info
+      <<: *var_state
+      tenant: "{{ tenant.name }}"
+      bd:     "{{ item.bd }}"
+      ap:     "{{ item.ap }}"
+      epg:    "{{ item.name }}"
+    with_items: "{{ epgs }}"

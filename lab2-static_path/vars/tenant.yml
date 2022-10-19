@@ -1,0 +1,14 @@
+---
+tenant:
+  name: "ansible-tenant1"
+
+epgs:
+  - name: "EPG_VLAN2020"
+    ap:   "demoAp"
+    bd:   "COMPUTE_SVC"
+  - name: "EPG_VLAN2030"
+    ap:   "demoAp"
+    bd:   "STORAGE_SVC"
+  - name: "EPG_VLAN2010"
+    ap:   "demoAp"
+    bd:   "ADMIN"

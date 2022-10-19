@@ -1,0 +1,31 @@
+---
+  - name: check operstat - 모든 인터페이스 정보 수집
+    cisco.aci.aci_rest:
+      host:           "{{ ansible_host }}" 
+      user:           "{{ ansible_user }}" 
+      password:       "{{ ansible_password }}" 
+      validate_certs: "{{ validate_certs }}"
+      use_ssl:        "{{ use_ssl }}"
+      path:           /api/class/ethpmPhysIf.json
+      method:         get
+    register: interfaces
+
+  - name: check operstat - 수집된 인터페이스 정보에서 oper stat 추출
+    set_fact:
+      chk1: "{{ interfaces | json_query('imdata[].ethpmPhysIf.attributes.{dn:dn,operSt:operSt}') }}"
+
+  # - name: check operstat - debugging
+  #   debug:
+  #     msg: "{{ chk1 | json_query(q) | json_query('[0].operSt') }}"
+  #   vars:
+  #     q: "[?dn==`topology/pod-{{ item.pod }}/node-{{ item.leaf }}/sys/phys-[eth{{ item.interface }}]/phys`]"
+  #   loop: "{{ static_paths }}"
+
+  # 인터페이스 oper stat이 down 상태이면 pass, 아니면 Fail
+  - name: check operstat - validate
+    assert:
+      that: "{{ chk1 | json_query(q) | json_query('[0].operSt') == 'down' }}"
+      fail_msg: "[FAILED][OPER_STAT_IS_NOT_DOWN][pod-{{ item.pod }}|node-{{ item.leaf }}|eth{{ item.interface }}]"
+    vars:
+      q: "[?dn==`topology/pod-{{ item.pod }}/node-{{ item.leaf }}/sys/phys-[eth{{ item.interface }}]/phys`]"
+    loop: "{{ static_paths }}"
